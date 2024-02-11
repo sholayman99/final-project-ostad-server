@@ -1,6 +1,6 @@
 /*
 * Author : Md. Sholayman
-* Description: This file contains two helper function for encoding and decoding jwt token.
+* Description: This file contains two helper functions for encoding and decoding jwt token.
 * Date: 11 February  2024.
 * */
 
