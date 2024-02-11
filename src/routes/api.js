@@ -6,7 +6,11 @@
 
 const express = require("express");
 const router = express.Router();
+const userController = require("../controllers/usesController");
 
+//user
+router.post("/createUser" , userController.createUser);
+router.post("/verifyUser/:email/:otp" , userController.verifyUser);
 
 
 module.exports = router;

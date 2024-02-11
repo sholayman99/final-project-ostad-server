@@ -9,7 +9,7 @@ const { createUserService, verifyUserService,loginUserService,updateAvatarServic
 
 exports.createUser = async(req,res)=>{
 
-    let data = await createUserService();
+    let data = await createUserService(req);
 
     if(data['status']==="success"){
         res.status(201).json(data);
@@ -17,10 +17,18 @@ exports.createUser = async(req,res)=>{
     else{
         res.status(400).json(data);
     }
-}
+
+};
 
 exports.verifyUser = async(req,res)=>{
+    let data = await verifyUserService(req);
 
+    if(data['status']==="success"){
+        res.status(201).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
 }
 
 exports.loginUser = async(req,res)=>{

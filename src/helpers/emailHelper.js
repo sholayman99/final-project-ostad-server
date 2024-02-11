@@ -19,7 +19,7 @@ const emailSend = async (email,emailSub,emailText)=>{
 
     const options={
         from:"Shoe Store <info@teamrabbil.com>",
-        email:email,
+        to:email,
         subject:emailSub,
         text:emailText
     };
@@ -28,4 +28,4 @@ const emailSend = async (email,emailSub,emailText)=>{
 
 }
 
-module.exports=emailSend;
+module.exports = emailSend;

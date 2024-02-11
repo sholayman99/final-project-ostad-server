@@ -7,8 +7,16 @@
 const mongoose = require("mongoose");
 
 const dataSchema = mongoose.Schema({
-        email:{type:String,required:true},
-        password:{type:String,required:true},
+
+        email:{type:String, required:true , unique:true},
+        password:{type:String,required:true, validate:{
+            validator:function (value){
+                return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)
+            },
+            message:"Password must contains 8 characters, at least one letter, one number and one special character"
+            }},
+        name:{type:String,required:true},
+        otp:{type:String,required:true},
         avatar:{type:String, default:"https://i.ibb.co/7XLTDWv/user.png"},
         mobile:{type:String,required:true , validate:{
                 validator:function(value){
