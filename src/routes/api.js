@@ -23,6 +23,7 @@ router.post("/updateProduct/:id" , authVerifyMiddleware , productController.upda
 router.get("/readProducts" , authVerifyMiddleware , productController.readProducts);
 router.get("/listByBrand/:brandID" , authVerifyMiddleware , productController.listByBrand);
 router.get("/listByCategory/:categoryID" , authVerifyMiddleware , productController.listByCategory);
+router.get("/listByKeyword/:keyword" , authVerifyMiddleware , productController.listByKeyword);
 
 
 

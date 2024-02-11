@@ -107,13 +107,18 @@ const listByCategoryService = async(req)=>{
       }
 }
 
-const listByKeywordService = async(req,res)=>{
+const listByKeywordService = async(req)=>{
 
     try {
-        
+        let keyword = req.params['keyword'];
+        let searchRegex = {$regex:keyword , $options:"i"};
+        let searchParams = {productName:searchRegex};
+        let matchStage ={$match:searchParams};
+        let data = await productModel.aggregate([matchStage]);
+        return {status:"success" , data:data};
     }
     catch (e) {
-        
+        return {status:"fail" , data:e.message};
     }
     
 }

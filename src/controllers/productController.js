@@ -76,4 +76,13 @@ exports.listByCategory = async(req,res)=>{
 
 exports.listByKeyword = async(req,res)=>{
 
+    let data = await listByKeywordService(req);
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
+
 }
