@@ -37,13 +37,40 @@ exports.updateProduct = async(req,res)=>{
 
 exports.readProducts = async(req,res)=>{
 
+    let data = await readProductsService();
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
+
 }
 
 exports.listByBrand = async(req,res)=>{
 
+    let data = await listByBrandService(req);
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
+
 }
 
 exports.listByCategory = async(req,res)=>{
+
+    let data = await listByCategoryService(req);
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
 
 }
 

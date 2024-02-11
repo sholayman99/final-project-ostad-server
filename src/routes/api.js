@@ -20,6 +20,9 @@ router.post("/updatePassword" , authVerifyMiddleware , userController.updatePass
 //product
 router.post("/createProduct" , authVerifyMiddleware , productController.createProduct);
 router.post("/updateProduct/:id" , authVerifyMiddleware , productController.updateProduct);
+router.get("/readProducts" , authVerifyMiddleware , productController.readProducts);
+router.get("/listByBrand/:brandID" , authVerifyMiddleware , productController.listByBrand);
+router.get("/listByCategory/:categoryID" , authVerifyMiddleware , productController.listByCategory);
 
 
 
