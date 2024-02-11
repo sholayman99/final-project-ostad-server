@@ -5,6 +5,9 @@
 * */
 
 const productModel = require("../models/productModel");
+const sliderModel = require("../models/sliderModel");
+const brandModel = require("../models/brandModel");
+const categoryModel = require("../models/categoryModel");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -49,6 +52,40 @@ const readProductsService = async()=>{
 
 }
 
+
+const readSliderService = async ()=>{
+    try {
+       let matchStage = {$match:{}}
+       let data = await sliderModel.aggregate([matchStage]);
+       return {status:"success" , data:data}
+    }
+    catch (e) {
+       return {status:"fail" , data:e.message}
+    }
+}
+
+const productByBrandService = async()=>{
+    try {
+        let matchStage = {$match:{}}
+        let data = await brandModel.aggregate([matchStage]);
+        return {status:"success" , data:data}
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message}
+    }
+
+}
+
+const productByCategoryService = async ()=>{
+    try {
+        let matchStage = {$match:{}}
+        let data = await categoryModel.aggregate([matchStage]);
+        return {status:"success" , data:data}
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message}
+    }
+}
 
 const listByBrandService = async(req)=>{
 
@@ -125,4 +162,5 @@ const listByKeywordService = async(req)=>{
 
 module.exports={
     createProductService,updateProductService,readProductsService,listByBrandService,
-    listByCategoryService,listByKeywordService }
+    listByCategoryService,listByKeywordService,readSliderService,productByBrandService,
+    productByCategoryService }

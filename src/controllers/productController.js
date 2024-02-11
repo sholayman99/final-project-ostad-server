@@ -6,7 +6,8 @@
 
 const {
     createProductService,updateProductService,readProductsService,listByBrandService,
-    listByCategoryService,listByKeywordService } = require("../services/productService");
+    listByCategoryService,listByKeywordService,readSliderService,productByBrandService,
+    productByCategoryService } = require("../services/productService");
 
 
 exports.createProduct = async(req,res) =>{
@@ -46,6 +47,39 @@ exports.readProducts = async(req,res)=>{
         res.status(400).json(data);
     }
 
+}
+
+exports.readSliders = async (req,res)=>{
+    let data = await readSliderService();
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
+}
+
+exports.productByBrand = async (req,res)=>{
+    let data = await productByBrandService();
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
+}
+
+exports.productByCategory = async (req,res)=>{
+    let data = await productByCategoryService();
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
 }
 
 exports.listByBrand = async(req,res)=>{
