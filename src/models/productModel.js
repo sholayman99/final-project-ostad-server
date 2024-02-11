@@ -15,5 +15,5 @@ const dataSchema = mongoose.Schema({
     },
     {versionKey:false , timestamps:true})
 
-const categoryModel = mongoose.model("categories" , dataSchema);
+const categoryModel = mongoose.model("products" , dataSchema);
 module.exports = categoryModel;

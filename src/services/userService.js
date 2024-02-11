@@ -70,7 +70,7 @@ const loginUserService = async(req,res)=>{
        }
     }
     catch (e) {
-        return {status:"success" , message:"Something went wrong!" , data:e.message};
+        return {status:"fail" , message:"Something went wrong!" , data:e.message};
     }
 
 }
@@ -86,7 +86,7 @@ const updateAvatarService = async(req,res)=>{
        return {status:"success" , data:data};
     }
     catch (e) {
-       return {status:"success" , data:e.message};
+       return {status:"fail" , data:e.message};
     }
 
 }
@@ -102,7 +102,7 @@ const updatePasswordService = async(req,res)=>{
         return {status:"success" , data:data};
     }
     catch (e) {
-        return {status:"success" , data:e.message};
+        return {status:"fail" , data:e.message};
     }
 
 }

@@ -6,7 +6,8 @@
 
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/usesController");
+const userController = require("../controllers/userController");
+const productController = require("../controllers/productController");
 const authVerifyMiddleware = require("../middlewares/authVerifyMiddleware");
 
 //user
@@ -15,6 +16,11 @@ router.post("/verifyUser/:email/:otp" , userController.verifyUser);
 router.post("/loginUser" , userController.loginUser);
 router.post("/updateAvatar" , authVerifyMiddleware , userController.updateAvatar);
 router.post("/updatePassword" , authVerifyMiddleware , userController.updatePassword);
+
+//product
+router.post("/createProduct" , authVerifyMiddleware , productController.createProduct);
+router.post("/updateProduct/:id" , authVerifyMiddleware , productController.updateProduct);
+
 
 
 module.exports = router;

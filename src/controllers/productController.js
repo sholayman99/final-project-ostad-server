@@ -11,9 +11,27 @@ const {
 
 exports.createProduct = async(req,res) =>{
 
+    let data = await createProductService(req);
+
+    if(data['status'] === 'success'){
+        res.status(201).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
+
 }
 
 exports.updateProduct = async(req,res)=>{
+
+    let data = await updateProductService(req);
+
+    if(data['status'] === 'success'){
+        res.status(200).json(data);
+    }
+    else{
+        res.status(400).json(data);
+    }
 
 }
 
