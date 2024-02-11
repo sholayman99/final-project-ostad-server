@@ -6,8 +6,7 @@
 
 const jwt = require("jsonwebtoken");
 
-exports.encodeToken =(userID,email)=>{
-
+exports.encodeToken =(email,userID)=>{
     let secret = "abc123xyz@#";
     let expires = {expiresIn: "168 hrs"};
     let payload = {email:email , userID:userID};

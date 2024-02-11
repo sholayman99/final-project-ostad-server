@@ -6,6 +6,7 @@
 
 const userModel = require("../models/userModel");
 const emailSend = require("../helpers/emailHelper");
+const {encodeToken} = require("../helpers/tokenHelper");
 
 
 const createUserService = async(req,res)=>{
@@ -52,13 +53,57 @@ const verifyUserService = async(req,res)=>{
 
 const loginUserService = async(req,res)=>{
 
+    try {
+       let email = req.body['email'];
+       let pass = req.body['password'];
+       let matchStage = {$match: {
+           email:email,password:pass
+           }};
+       let countStage ={$count: "total"};
+       let totalCount = await userModel.aggregate([
+           matchStage,countStage
+       ]);
+       if(totalCount.length === 1){
+           let userID = await userModel.find({  email:email,password:pass}).select('_id');
+           let token = encodeToken(email,userID[0]['_id']);
+           return {status:"success" , message:"Logged in successfully" , token:token};
+       }
+    }
+    catch (e) {
+        return {status:"success" , message:"Something went wrong!" , data:e.message};
+    }
+
 }
 
 const updateAvatarService = async(req,res)=>{
 
+    try {
+       let avatar = req.body['avatar'];
+       let email = req.headers['email'];
+       let data = await userModel.updateOne(
+           {email:email} , {$set:{avatar:avatar}},{upsert:true}
+       );
+       return {status:"success" , data:data};
+    }
+    catch (e) {
+       return {status:"success" , data:e.message};
+    }
+
 }
 
 const updatePasswordService = async(req,res)=>{
+
+    try {
+        let pass = req.body['password'];
+        let email = req.headers['email'];
+        let data = await userModel.updateOne(
+            {email:email} , {$set:{password:pass}},{upsert:true}
+        );
+        return {status:"success" , data:data};
+    }
+    catch (e) {
+        return {status:"success" , data:e.message};
+    }
 
 }
 

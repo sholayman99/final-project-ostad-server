@@ -15,13 +15,12 @@ module.exports =(req, res, next)=>{
 
         let decoded = decodeToken(token);
         if(decoded === null){
-            res.status(401).json({status:"unauthorized" , message:"No user found!"})
+            res.status(401).json({status:"fail" , message:"Unauthorized"})
         }
         else{
-            let email = decoded['email'];
-            let userID = decoded['userID'];
-            res.headers.email = email ;
-            req.headers.userID = userID;
+
+            req.headers.email = decoded.email ;
+            req.headers.userID =decoded.userID;
             next();
         }
 
