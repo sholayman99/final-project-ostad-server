@@ -9,7 +9,7 @@ const emailSend = require("../helpers/emailHelper");
 const {encodeToken} = require("../helpers/tokenHelper");
 
 
-const createUserService = async(req,res)=>{
+const createUserService = async(req)=>{
 
     try {
         let reqBody = req['body'];
@@ -107,6 +107,18 @@ const updatePasswordService = async(req,res)=>{
 
 }
 
+const userInfoService = async (req)=>{
+    try {
+        let email = req.headers['email'];
+        let matchStage = {$match:{email:email}};
+        let data = await userModel.aggregate([matchStage]);
+        return {status:"success", data:data}
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message}
+    }
+}
+
 module.exports={
-    createUserService, verifyUserService,loginUserService,updateAvatarService,updatePasswordService
-             }
+    createUserService, verifyUserService,loginUserService,updateAvatarService,updatePasswordService,
+    userInfoService }

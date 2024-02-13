@@ -9,7 +9,8 @@ const mongoose = require("mongoose");
 const dataSchema = mongoose.Schema({
 
         email:{type:String, required:true , unique:true},
-        password:{type:String,required:true, validate:{
+        password:{type:String,required:true,
+            validate:{
             validator:function (value){
                 return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)
             },
@@ -18,7 +19,8 @@ const dataSchema = mongoose.Schema({
         name:{type:String,required:true},
         otp:{type:String,required:true},
         avatar:{type:String, default:"https://i.ibb.co/7XLTDWv/user.png"},
-        mobile:{type:String,required:true , validate:{
+        mobile:{type:String,required:true ,
+            validate:{
                 validator:function(value){
                     return /^(?:\+?88|0088)?01[15-9]\d{8}$/.test(value)
                 },

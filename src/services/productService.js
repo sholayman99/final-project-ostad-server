@@ -43,7 +43,8 @@ const readProductsService = async()=>{
 
     try {
         let matchStage ={$match:{}};
-        let data = await productModel.aggregate([matchStage]);
+        let limitStage ={$limit:6}
+        let data = await productModel.aggregate([matchStage,limitStage]);
         return {status:"success" , data:data};
     }
     catch (e) {

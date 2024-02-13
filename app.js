@@ -25,7 +25,7 @@ const cookieParser = require("cookie-parser");
 const { rateLimit } = require("express-rate-limit");
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 60 * 60 * 1000,
     max: 100,
     standardHeaders: "draft-7",
     legacyHeaders: false,
@@ -34,7 +34,10 @@ const limiter = rateLimit({
 
 //implementation of security middlewares.
 
-app.use(cors());
+app.use(cors({
+    credentials:true,
+    origin:"http://localhost:5173"
+}));
 app.use(hpp());
 app.use(helmet());
 app.use(xss());

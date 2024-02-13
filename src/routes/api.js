@@ -16,14 +16,15 @@ router.post("/verifyUser/:email/:otp" , userController.verifyUser);
 router.post("/loginUser" , userController.loginUser);
 router.post("/updateAvatar" , authVerifyMiddleware , userController.updateAvatar);
 router.post("/updatePassword" , authVerifyMiddleware , userController.updatePassword);
+router.get("/userInfo" ,authVerifyMiddleware, userController.userInfo);
 
 //product
 router.post("/createProduct" , authVerifyMiddleware , productController.createProduct);
 router.post("/updateProduct/:id" , authVerifyMiddleware , productController.updateProduct);
-router.get("/readProducts" , authVerifyMiddleware , productController.readProducts);
+router.get("/readProducts" , productController.readProducts);
 router.get("/readSliders" , productController.readSliders);
-router.get("/productByBrand" , authVerifyMiddleware ,productController.productByBrand);
-router.get("/productByCategory" , authVerifyMiddleware ,productController.productByCategory);
+router.get("/productByBrand"  ,productController.productByBrand);
+router.get("/productByCategory"  ,productController.productByCategory);
 router.get("/listByBrand/:brandID" , authVerifyMiddleware , productController.listByBrand);
 router.get("/listByCategory/:categoryID" , authVerifyMiddleware , productController.listByCategory);
 router.get("/listByKeyword/:keyword" , authVerifyMiddleware , productController.listByKeyword);
