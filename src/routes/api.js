@@ -30,7 +30,7 @@ router.get("/productByCategory"  ,productController.productByCategory);
 router.get("/listByBrand/:brandID" , authVerifyMiddleware , productController.listByBrand);
 router.get("/listByCategory/:categoryID" , authVerifyMiddleware , productController.listByCategory);
 router.get("/listByKeyword/:keyword" , authVerifyMiddleware , productController.listByKeyword);
-
+router.post('/productListByFilter' , authVerifyMiddleware, productController.productListByFilter );
 
 
 module.exports = router;

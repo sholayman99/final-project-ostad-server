@@ -174,7 +174,40 @@ const listByKeywordService = async(req)=>{
     
 }
 
+const productListByFilterService = async(req)=>{
+    try {
+        let matchConditions = {}
+        if(req.body['brandID']){
+            matchConditions.brandID = new ObjectId(req.body['brandID']);
+        }
+        if(req.body['categoryID']){
+            matchConditions.categoryID = new ObjectId(req.body['categoryID']);
+        }
+        let matchStage ={$match:matchConditions};
+        let joinWithBrandStage = {
+            $lookup:{ from:"brands" , foreignField:"_id" , localField:"brandID" , as:"brand"}
+        };
+        let joinWithCategoryStage = {
+            $lookup:{ from:"categories" , foreignField:"_id" , localField:"categoryID" , as:"category"}
+        };
+        let unwindBrandStage = {$unwind:"$brand"};
+        let unwindCategoryStage = {$unwind:"$category"};
+        let projectionStage = {
+            $project:{ "brand._id":0 , "category._id":0 , "categoryID":0 , "brandID":0 }
+        };
+
+        let data = await productModel.aggregate([
+            matchStage,joinWithBrandStage,joinWithCategoryStage,unwindBrandStage,unwindCategoryStage,
+            projectionStage
+        ]);
+        return {status:"success" , data:data};
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message};
+    }
+}
+
 module.exports={
     createProductService,updateProductService,readProductsService,listByBrandService,
     listByCategoryService,listByKeywordService,readSliderService,productByBrandService,
-    productByCategoryService,readALLProductsService }
+    productByCategoryService,readALLProductsService,productListByFilterService }
