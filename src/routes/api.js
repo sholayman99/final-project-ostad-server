@@ -17,11 +17,13 @@ router.post("/loginUser" , userController.loginUser);
 router.post("/updateAvatar" , authVerifyMiddleware , userController.updateAvatar);
 router.post("/updatePassword" , authVerifyMiddleware , userController.updatePassword);
 router.get("/userInfo" ,authVerifyMiddleware, userController.userInfo);
+router.get('/logout' , userController.logout);
 
 //product
 router.post("/createProduct" , authVerifyMiddleware , productController.createProduct);
 router.post("/updateProduct/:id" , authVerifyMiddleware , productController.updateProduct);
 router.get("/readProducts" , productController.readProducts);
+router.get("/readAllProducts", authVerifyMiddleware , productController.readAllProducts);
 router.get("/readSliders" , productController.readSliders);
 router.get("/productByBrand"  ,productController.productByBrand);
 router.get("/productByCategory"  ,productController.productByCategory);

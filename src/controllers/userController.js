@@ -22,19 +22,13 @@ exports.verifyUser = async(req,res)=>{
 };
 
 exports.loginUser = async(req,res)=>{
-
     let data = await loginUserService(req);
-    if(data['status']==="success"){
-        let cookieOption={
-            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-            httpOnly:false
-        }
-        res.cookie("token",data['token'],cookieOption);
-        return res.status(200).json(data);
-    } else{
-        return res.status(200).json(data);
+    let cookieOption={
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        httpOnly:false
     }
-
+    res.cookie("token",data['token'],cookieOption);
+    return res.status(200).json(data);
 };
 
 exports.logout = async (req,res)=>{

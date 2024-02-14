@@ -7,7 +7,7 @@
 const {
     createProductService,updateProductService,readProductsService,listByBrandService,
     listByCategoryService,listByKeywordService,readSliderService,productByBrandService,
-    productByCategoryService } = require("../services/productService");
+    productByCategoryService,readALLProductsService } = require("../services/productService");
 
 
 exports.createProduct = async(req,res) =>{
@@ -22,6 +22,11 @@ exports.updateProduct = async(req,res)=>{
 
 exports.readProducts = async(req,res)=>{
     let data = await readProductsService();
+    res.status(200).json(data);
+}
+
+exports.readAllProducts = async(req,res)=>{
+    let data = await readALLProductsService();
     res.status(200).json(data);
 }
 

@@ -18,7 +18,7 @@ const dataSchema = mongoose.Schema({
             }},
         name:{type:String,required:true},
         otp:{type:String,required:true},
-        avatar:{type:String, default:"https://i.ibb.co/7XLTDWv/user.png"},
+        avatar:{type:String},
         mobile:{type:String,required:true ,
             validate:{
                 validator:function(value){

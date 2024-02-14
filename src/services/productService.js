@@ -53,6 +53,19 @@ const readProductsService = async()=>{
 
 }
 
+const readALLProductsService= async()=>{
+
+    try {
+        let matchStage ={$match:{}};
+        let data = await productModel.aggregate([matchStage]);
+        return {status:"success" , data:data};
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message};
+    }
+
+}
+
 
 const readSliderService = async ()=>{
     try {
@@ -164,4 +177,4 @@ const listByKeywordService = async(req)=>{
 module.exports={
     createProductService,updateProductService,readProductsService,listByBrandService,
     listByCategoryService,listByKeywordService,readSliderService,productByBrandService,
-    productByCategoryService }
+    productByCategoryService,readALLProductsService }
