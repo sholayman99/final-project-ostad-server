@@ -112,7 +112,7 @@ const userInfoService = async (req)=>{
         let email = req.headers['email'];
         let matchStage = {$match:{email:email}};
         let projectStage ={$project:{
-            "_id":0,"password":0,"email":0,"mobile":0,"otp":0,"createdAt":0,"updatedAt":0
+            "_id":0,"password":0,"otp":0,"createdAt":0,"updatedAt":0
             }};
         let data = await userModel.aggregate([matchStage,projectStage]);
         return {status:"success", data:data}

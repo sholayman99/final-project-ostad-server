@@ -22,6 +22,8 @@ router.get('/logout' , userController.logout);
 //product
 router.post("/createProduct" , authVerifyMiddleware , productController.createProduct);
 router.post("/updateProduct/:id" , authVerifyMiddleware , productController.updateProduct);
+router.get('/readSingleProduct/:id' , authVerifyMiddleware , productController.readSingleProduct);
+router.delete('/removeProduct/:id' , authVerifyMiddleware , productController.removeProduct)
 router.get("/readProducts" , productController.readProducts);
 router.get("/readAllProducts", authVerifyMiddleware , productController.readAllProducts);
 router.get("/readSliders" , productController.readSliders);

@@ -38,6 +38,29 @@ const updateProductService = async(req) =>{
 
 }
 
+const readSingleProductService = async (req)=>{
+    try {
+        let id = req.params.id;
+        let data = await productModel.findOne({_id:id});
+        return {status:"success" , data:data};
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message};
+    }
+}
+
+
+const removeProductService = async (req)=>{
+    try {
+        let id = req.params.id;
+        let data = await productModel.deleteOne({_id:id});
+        return {status:"success" , data:data};
+    }
+    catch (e) {
+        return {status:"fail" , data:e.message};
+    }
+}
+
 
 const readProductsService = async()=>{
 
@@ -210,4 +233,5 @@ const productListByFilterService = async(req)=>{
 module.exports={
     createProductService,updateProductService,readProductsService,listByBrandService,
     listByCategoryService,listByKeywordService,readSliderService,productByBrandService,
-    productByCategoryService,readALLProductsService,productListByFilterService }
+    productByCategoryService,readALLProductsService,productListByFilterService,readSingleProductService,
+    removeProductService}
